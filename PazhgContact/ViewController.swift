@@ -51,11 +51,11 @@ class ViewController: UIViewController {
                 self.textviewStatus.text.append("\n Error \(error)")
             } else {
                 if granted {
-                   self.textviewStatus.text.append("The Permission has been granted to access the Contacts!")
+                   self.textviewStatus.text.append("\nThe Permission has been granted to access the Contacts!")
                     sender.isEnabled = false
                     self.ActiveButtons(with: true )
                 } else {
-                    self.textviewStatus.text.append("The Permission has not been granted to access the Contacts!")
+                    self.textviewStatus.text.append("\nThe Permission has not been granted to access the Contacts!")
                     sender.isEnabled = true
                     self.ActiveButtons(with: false )
                 } // end of granted else
@@ -69,6 +69,22 @@ class ViewController: UIViewController {
     }
     
     @IBAction func buttonAddSimpleContact(_ sender: UIButton) {
+        // Creating a mutable object to add to the contact
+        let contact = CNMutableContact()
+        
+        contact.contactType = CNContactType.person
+        
+        //Personal Information
+        contact.givenName = "Kambiz"
+        contact.familyName = "Guity"
+        contact.middleName = ""
+        contact.nickname = ""
+        contact.departmentName = "Management"
+        contact.jobTitle = "President & Co-Founder"
+        contact.organizationName = "Pazhg Company - Native App Development Group"
+        contact.note = "This app is a simple app for a person who wants to write code to working on Contacts"
+        //TODO- : Complete code to insert new item in contact list
+    
     }
     
     @IBAction func buttonAddComplexContact(_ sender: UIButton) {
