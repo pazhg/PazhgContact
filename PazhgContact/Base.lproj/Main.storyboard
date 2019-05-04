@@ -27,25 +27,96 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Access the user's contacts and format and localize contact information." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e4j-FB-hiD">
-                                <rect key="frame" x="16" y="86" width="382" height="53"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e4j-FB-hiD">
+                                <rect key="frame" x="16" y="88" width="382" height="140"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="140" id="mwC-rr-tHq"/>
+                                </constraints>
+                                <string key="text">Access the user's contacts and format and localize contact information. The Contacts framework provides Swift and Objective-C API to access the user’s contact information. Because most apps read contact information without making any changes, this framework is optimized for thread-safe, read-only usage.</string>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3qC-i9-WBz">
+                                <rect key="frame" x="16" y="308" width="382" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="dqy-oN-G3K"/>
+                                </constraints>
+                                <state key="normal" title="Add a simple contact to contact list">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="buttonAddSimpleContact:" destination="BYZ-38-t0r" eventType="touchUpInside" id="InH-aW-XvC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HNh-o8-dZl">
+                                <rect key="frame" x="16" y="368" width="382" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="BIg-iB-d5E"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="sDf-RR-ruF"/>
+                                </constraints>
+                                <state key="normal" title="Add a complex contact to contact list">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="buttonAddComplexContact:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hXM-x2-7nv"/>
+                                    <action selector="buttonAddSimpleContact:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SX6-dJ-ffR"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FDO-np-jVD">
+                                <rect key="frame" x="16" y="248" width="382" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="lHE-CZ-eTm"/>
+                                </constraints>
+                                <state key="normal" title="Get Permission to access contacts">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="buttonAddComplexContact:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rv9-hF-Qst"/>
+                                    <action selector="buttonAddSimpleContact:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sJf-6H-Ri3"/>
+                                    <action selector="buttonAuthorization:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wRi-ra-56c"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Status:" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FsO-Mo-eHI">
+                                <rect key="frame" x="16" y="572" width="382" height="290"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="290" id="ZBH-1B-5fA"/>
+                                </constraints>
+                                <color key="textColor" red="1" green="0.04771332097" blue="0.049696463640000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="e4j-FB-hiD" secondAttribute="bottom" constant="723" id="85q-Qp-szt"/>
-                            <constraint firstItem="e4j-FB-hiD" firstAttribute="trailing" secondItem="H1f-kd-UAQ" secondAttribute="trailing" id="IUg-j0-YhN"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="e4j-FB-hiD" secondAttribute="trailing" constant="16" id="1Uf-9t-iwM"/>
+                            <constraint firstItem="HNh-o8-dZl" firstAttribute="top" secondItem="3qC-i9-WBz" secondAttribute="bottom" constant="20" id="2qv-cl-JhZ"/>
+                            <constraint firstItem="e4j-FB-hiD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="6SU-Ef-aFZ"/>
+                            <constraint firstItem="HNh-o8-dZl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="6TT-Fz-kdJ"/>
+                            <constraint firstItem="FsO-Mo-eHI" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="9dI-wA-RyL"/>
+                            <constraint firstItem="FsO-Mo-eHI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Djw-UP-iku"/>
+                            <constraint firstItem="FDO-np-jVD" firstAttribute="top" secondItem="e4j-FB-hiD" secondAttribute="bottom" constant="20" id="K00-cz-HXH"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="FDO-np-jVD" secondAttribute="trailing" constant="16" id="Ksw-nE-ejQ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="H1f-kd-UAQ" secondAttribute="trailing" constant="16" id="LkP-ZZ-LYW"/>
                             <constraint firstItem="H1f-kd-UAQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="SO7-6P-7hv"/>
-                            <constraint firstItem="e4j-FB-hiD" firstAttribute="top" secondItem="H1f-kd-UAQ" secondAttribute="bottom" constant="8" symbolic="YES" id="amB-Lg-3wc"/>
+                            <constraint firstItem="FDO-np-jVD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="TjM-83-TCQ"/>
+                            <constraint firstItem="3qC-i9-WBz" firstAttribute="top" secondItem="FDO-np-jVD" secondAttribute="bottom" constant="20" id="Y1h-ZG-7A5"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="HNh-o8-dZl" secondAttribute="trailing" constant="16" id="YTN-rv-wPD"/>
+                            <constraint firstItem="3qC-i9-WBz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Ym7-93-CHu"/>
+                            <constraint firstItem="e4j-FB-hiD" firstAttribute="top" secondItem="H1f-kd-UAQ" secondAttribute="bottom" constant="10" id="czD-3G-lrI"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3qC-i9-WBz" secondAttribute="trailing" constant="16" id="eTu-ET-zIm"/>
                             <constraint firstItem="H1f-kd-UAQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="m7u-Ma-gyv"/>
-                            <constraint firstItem="e4j-FB-hiD" firstAttribute="leading" secondItem="H1f-kd-UAQ" secondAttribute="leading" id="qFr-dC-RQh"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="FsO-Mo-eHI" secondAttribute="trailing" constant="16" id="rbg-LL-Y8e"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="buttonAddComplexContact" destination="HNh-o8-dZl" id="9CH-lC-aNC"/>
+                        <outlet property="buttonAddSimpleContact" destination="3qC-i9-WBz" id="uWr-Jm-a6d"/>
+                        <outlet property="buttonAuthorization" destination="FDO-np-jVD" id="zqi-Kd-mCb"/>
+                        <outlet property="textviewStatus" destination="FsO-Mo-eHI" id="9eO-qz-bkg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
