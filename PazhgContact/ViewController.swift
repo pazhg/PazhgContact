@@ -103,25 +103,19 @@ class ViewController: UIViewController {
             self.textviewStatus.text.append( "\n The ContactStore is empty!")
             return
         }
-        
         textviewStatus.text.append("\n Inside -> Create a simple contact...")
        
         let contact = CNMutableContact()
         
         contact.contactType = CNContactType.person
-        
         //Personal Information
         contact.givenName = "John"
         contact.familyName = "Smith"
-        contact.middleName = "Junior"
+        contact.middleName = "Simple"
         contact.nickname = "Joju"
         contact.departmentName = "SampleThink"
-        
-        
         contact.jobTitle = "Thinker"
-        
         contact.organizationName = "Hours"
-        
         contact.note = "This app is a simple app for a person who wants to write code to working on Contacts"
         
         let saveRequest = CNSaveRequest.init()
@@ -135,6 +129,54 @@ class ViewController: UIViewController {
     }
     
     @IBAction func buttonAddComplexContact(_ sender: UIButton) {
+        guard  mainContactStore != nil else {
+            self.textviewStatus.text.append( "\n The ContactStore is empty!")
+            return
+        }
+        
+        textviewStatus.text.append("\n Inside -> Create a complex contact...")
+        
+        let contact = CNMutableContact()
+        
+        contact.contactType = CNContactType.person
+        //Personal Information
+        contact.givenName = "John"
+        contact.familyName = "Smith"
+        contact.middleName = "Complex"
+        contact.nickname = "Joco"
+        contact.departmentName = "Think different"
+        contact.jobTitle = "Thouther"
+        contact.organizationName = "Weekly"
+        contact.note = "This app is a simple app for a person who wants to write code to working on Contacts"
+       
+        let address = CNMutablePostalAddress()
+        address.street = "Your Street"
+        address.city = "Your City"
+        address.state = "Your State"
+        address.postalCode = "Your ZIP/Postal Code"
+        address.country = "Your Country"
+        
+        let home = CNLabeledValue<CNPostalAddress>(label:CNLabelHome, value:address)
+        contact.postalAddresses = [home]
+        
+        var phone = CNPhoneNumber.init(stringValue: "7654321")
+        let workPhone = CNLabeledValue <CNPhoneNumber>(label: CNLabelPhoneNumberMain, value: phone )
+        
+        phone = CNPhoneNumber.init(stringValue: "1234567")
+        let iphonePhone = CNLabeledValue <CNPhoneNumber>(label: CNLabelPhoneNumberiPhone, value:  phone)
+
+        contact.phoneNumbers = [ iphonePhone , workPhone ]
+        
+        let saveRequest = CNSaveRequest.init()
+        saveRequest.add(contact, toContainerWithIdentifier: nil)
+        
+        do {
+            try mainContactStore?.execute(saveRequest)
+        } catch {
+            self.textviewStatus.text.append("\n Error: \(error)")
+        }
+        
+        
     }
     
 }
