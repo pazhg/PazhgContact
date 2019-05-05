@@ -11,6 +11,7 @@ import Contacts
 
 class ViewController: UIViewController {
 
+    var mainContactStore : CNContactStore?
     
     @IBOutlet weak var buttonAuthorization: UIButton!
     @IBOutlet weak var buttonAddSimpleContact: UIButton!
@@ -21,55 +22,90 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        AddAttribute(To: buttonAuthorization )
-        AddAttribute(To: buttonAddSimpleContact)
-        AddAttribute(To: buttonAddComplexContact)
-        
-        AddAttribute(To: textviewStatus)
+        AddAttribute(To: buttonAuthorization, With: UIColor.black )
+        AddAttribute(To: buttonAddSimpleContact , With: UIColor.gray)
+        AddAttribute(To: buttonAddComplexContact , With: UIColor.gray )
+
+        AddAttribute(To: textviewStatus , With: UIColor.red)
     }
     
     // MARK: - Design Button
-    func AddAttribute ( To Object : AnyObject ) {
+    func AddAttribute ( To Object : AnyObject , With Color : UIColor ) {
         Object.layer.cornerRadius = 5
         Object.layer.borderWidth = 1
-        Object.layer.borderColor = UIColor.black.cgColor
+        Object.layer.borderColor = Color.cgColor
         
         if Object is UITextView {
-            Object.layer?.borderColor = UIColor.red.cgColor
+            Object.layer?.borderColor = Color.cgColor
         }
     }
     
     // MARK: - Buttons
     
     @IBAction func buttonAuthorization(_ sender: UIButton) {
-        //Fetching - I/O Contacts
+
+        let contactStore = checkContactStore()
+        
+        self.textviewStatus.text?.append ("\n\(CNContactStore.authorizationStatus(for: .contacts))")
+        self.textviewStatus.text?.append("\(contactStore.2)")
+        
+        let statusContactStore = contactStore.1
+        ActiveButtons(with: statusContactStore)
+        
+        mainContactStore = contactStore.0
+        
+    } // end of buttonAuthorization
+    
+    func checkContactStore () -> ( CNContactStore , Bool , String ) {
+
         let store = CNContactStore ()
-        textviewStatus.text?.append ("\n \(CNContactStore.authorizationStatus(for: .contacts))")
-        store.requestAccess(for: CNEntityType.contacts) { (granted :Bool, error :
+        var status = false
+        var string =  ""
+        
+        store.requestAccess(for: CNEntityType.contacts) { (granted : Bool, error :
             Error?) in
             if let error = error {
-                self.textviewStatus.text.append("\n Error \(error)")
+               string =  "\n Error \(error)"
             } else {
                 if granted {
-                   self.textviewStatus.text.append("\nThe Permission has been granted to access the Contacts!")
-                    sender.isEnabled = false
-                    self.ActiveButtons(with: true )
+                    string = "\nThe Permission has been granted to access the Contacts!"
+                    status = true
                 } else {
-                    self.textviewStatus.text.append("\nThe Permission has not been granted to access the Contacts!")
-                    sender.isEnabled = true
-                    self.ActiveButtons(with: false )
+                    string = "\nThe Permission has not been granted to access the Contacts!"
+                    status =  false
                 } // end of granted else
             } // end of error else
         } // end of storeRequestAccess
-    } // end of buttonAuthorization
+        return ( store , status , string )
+    }
     
     func ActiveButtons (with : Bool) {
         buttonAddSimpleContact.isEnabled = with
         buttonAddComplexContact.isEnabled = with
+        buttonAuthorization.isEnabled = !with
+        
+        if with {
+            AddAttribute(To: buttonAuthorization, With: UIColor.gray )
+            AddAttribute(To: buttonAddSimpleContact , With: UIColor.black)
+            AddAttribute(To: buttonAddComplexContact , With: UIColor.black )
+        }
+        else {
+            AddAttribute(To: buttonAuthorization, With: UIColor.black )
+            AddAttribute(To: buttonAddSimpleContact , With: UIColor.gray)
+            AddAttribute(To: buttonAddComplexContact , With: UIColor.gray )
+        }
     }
     
     @IBAction func buttonAddSimpleContact(_ sender: UIButton) {
         // Creating a mutable object to add to the contact
+        
+        guard  mainContactStore != nil else {
+            self.textviewStatus.text = "\n The ContactStore is empty!"
+            return
+        }
+        
+        textviewStatus.text = "Inside -> Create a simple contact..."
+       
         let contact = CNMutableContact()
         
         contact.contactType = CNContactType.person
@@ -83,7 +119,10 @@ class ViewController: UIViewController {
         contact.jobTitle = "President & Co-Founder"
         contact.organizationName = "Pazhg Company - Native App Development Group"
         contact.note = "This app is a simple app for a person who wants to write code to working on Contacts"
+        
         //TODO- : Complete code to insert new item in contact list
+        
+        
     
     }
     
