@@ -100,31 +100,38 @@ class ViewController: UIViewController {
         // Creating a mutable object to add to the contact
         
         guard  mainContactStore != nil else {
-            self.textviewStatus.text = "\n The ContactStore is empty!"
+            self.textviewStatus.text.append( "\n The ContactStore is empty!")
             return
         }
         
-        textviewStatus.text = "Inside -> Create a simple contact..."
+        textviewStatus.text.append("\n Inside -> Create a simple contact...")
        
         let contact = CNMutableContact()
         
         contact.contactType = CNContactType.person
         
         //Personal Information
-        contact.givenName = "Kambiz"
-        contact.familyName = "Guity"
-        contact.middleName = ""
-        contact.nickname = ""
-        contact.departmentName = "Management"
-        contact.jobTitle = "President & Co-Founder"
-        contact.organizationName = "Pazhg Company - Native App Development Group"
+        contact.givenName = "John"
+        contact.familyName = "Smith"
+        contact.middleName = "Junior"
+        contact.nickname = "Joju"
+        contact.departmentName = "SampleThink"
+        
+        
+        contact.jobTitle = "Thinker"
+        
+        contact.organizationName = "Hours"
+        
         contact.note = "This app is a simple app for a person who wants to write code to working on Contacts"
         
-        //TODO- : Complete code to insert new item in contact list
-        
         let saveRequest = CNSaveRequest.init()
-        
-    
+        saveRequest.add(contact, toContainerWithIdentifier: nil)
+
+        do {
+            try mainContactStore?.execute(saveRequest)
+        } catch {
+            self.textviewStatus.text.append("\n Error: \(error)")
+        }
     }
     
     @IBAction func buttonAddComplexContact(_ sender: UIButton) {
